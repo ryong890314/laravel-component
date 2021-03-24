@@ -1,15 +1,15 @@
 <x-jet-action-section>
     <x-slot name="title">
-        {{ __('Browser Sessions') }}
+        {{ __('로그인 세션') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Manage and log out your active sessions on other browsers and devices.') }}
+        {{ __('다른 브라우저 및 디바이스에서 로그인된 세션을 관리하고 로그아웃 합니다.') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
+            {{ __('필요한 경우 모든 장치에서 다른 모든 브라우저 세션에서 로그아웃 할 수 있습니다. 최근 세션 중 일부는 다음과 같습니다. 그러나 이 목록은 정확하지 않을 수 있습니다. 계정이 도용되었다고 생각되면 비밀번호도 변경하십시오.') }}
         </div>
 
         @if (count($this->sessions) > 0)
@@ -36,12 +36,12 @@
 
                             <div>
                                 <div class="text-xs text-gray-500">
-                                    {{ $session->ip_address }},
+                                    {{ $session->ip_address }}
 
                                     @if ($session->is_current_device)
-                                        <span class="text-green-500 font-semibold">{{ __('This device') }}</span>
+                                        <span class="text-green-500 font-semibold">{{ __('현재 디바이스') }}</span>
                                     @else
-                                        {{ __('Last active') }} {{ $session->last_active }}
+                                        {{ __('마지막 접속') }} {{ $session->last_active }}
                                     @endif
                                 </div>
                             </div>
@@ -53,22 +53,22 @@
 
         <div class="flex items-center mt-5">
             <x-jet-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                {{ __('Log Out Other Browser Sessions') }}
+                {{ __('다른 브라우저 세션 로그아웃') }}
             </x-jet-button>
 
             <x-jet-action-message class="ml-3" on="loggedOut">
-                {{ __('Done.') }}
+                {{ __('완료.') }}
             </x-jet-action-message>
         </div>
 
         <!-- Log Out Other Devices Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingLogout">
             <x-slot name="title">
-                {{ __('Log Out Other Browser Sessions') }}
+                {{ __('다른 브라우저 세션 로그아웃') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
+                {{ __('모든 다른 브라우저 세션에서 로그아웃 하려면 암호를 입력하십시오.') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-jet-input type="password" class="mt-1 block w-3/4"
@@ -83,13 +83,13 @@
 
             <x-slot name="footer">
                 <x-jet-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
+                    {{ __('취소') }}
                 </x-jet-secondary-button>
 
                 <x-jet-button class="ml-2"
                             wire:click="logoutOtherBrowserSessions"
                             wire:loading.attr="disabled">
-                    {{ __('Log Out Other Browser Sessions') }}
+                    {{ __('다른 브라우저 세션 로그아웃') }}
                 </x-jet-button>
             </x-slot>
         </x-jet-dialog-modal>
