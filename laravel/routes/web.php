@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 
+use App\Http\Controllers\ManageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/manage', [ManageController::class, 'index'])->middleware('can:isAdmin')->name('manage.show');
+Route::get('/manage/edit/{id}', [ManageController::class, 'edit'])->middleware('can:isAdmin')->name('manage.edit');
