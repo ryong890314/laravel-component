@@ -16,4 +16,19 @@ class ManageController extends Controller
         $user = User::findOrFail($id);
         return view('manage.edit', compact('user'));
     }
+
+    public function update(Request $request) {
+
+        $id = $request -> id;
+        $userRole = $request -> role;
+
+        User::where('id', $id)->update(
+            ['role' => $userRole]
+        );
+
+        $users = User::all();
+
+        return redirect()->route('manage.show')->with('users', $users);
+
+    }
 }

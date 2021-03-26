@@ -62,7 +62,7 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('manage.edit', $user->id)}}" class="btn btn-primary btn-sm">설정</a>
+                            <a href="{{ route('manage.edit', $user->id)}}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">설정</a>
                         </td>
                         </tr>
                         @endforeach
