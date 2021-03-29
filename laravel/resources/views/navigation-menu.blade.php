@@ -15,6 +15,9 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('홈') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('board.show') }}" :active="request()->routeIs('board.show')">
+                        {{ __('게시판') }}
+                    </x-jet-nav-link>
 
                     @can('isAdmin')
                     <x-jet-nav-link href="{{ route('manage.show') }}" :active="request()->routeIs('manage.show')">
