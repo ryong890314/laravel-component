@@ -28,7 +28,10 @@
                             수정날짜
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            사용자유형
+                            게시판유형
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            공개범위
                         </th>
                         <th scope="col" class="relative px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -56,13 +59,19 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-500">{{ $board->updated_at}}</div>
                         </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                            {{ $board->type}}
+                            </span>
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
                             {{ $board->scope }}
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            
+                            <a href="{{ route('board.edit', $board->id)}}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">설정</a>
+
                         </td>
                         </tr>
                         @endforeach
@@ -71,6 +80,9 @@
                 </div>
                 </div>
             </div>
+        <div class="mt-3 sm:mt-0 sm:ml-3 py-6">
+        <a href="{{ route('board.create')}}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-gray-300 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">게시판 만들기</a>
+      </div>
             </div>
 
         </div>

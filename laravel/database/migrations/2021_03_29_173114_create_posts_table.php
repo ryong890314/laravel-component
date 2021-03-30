@@ -15,9 +15,13 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('board_id');
+            $table->foreign('board_id')->references('id')->on('boards');
+            $table->bigInteger('user_id');
+            $table->integer('no');
             $table->string('title');
-            $table->string('content');
-            $table->integer('view_count');
+            $table->mediumText('content');
+            $table->integer('view_count')->default(0);;
             $table->timestamps();
         });
     }
