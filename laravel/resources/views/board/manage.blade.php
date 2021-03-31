@@ -5,9 +5,14 @@
         </h2>
 
         <div class="max-w-7xl mx-auto pt-6">
+        @foreach ($boards as $board)
+        {{ $board->name }}
+        @endforeach
+        @can('isAdmin')
         <a href="{{ route('board.manage') }}">
             {{ __('관리') }}
         </a>
+        @endcan
         </div>
         
     </x-slot>
@@ -26,40 +31,55 @@
                             번호
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            제목
+                            게시판명
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            작성자
+                            등록날짜
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            등록일
+                            게시판유형
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            조회수
+                            공개범위
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            옵션
                         </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach ($posts as $post)
+                    @foreach ($boards as $board)
                         <tr>
                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ $post->no}}</div>
+                            <div class="text-sm text-gray-900">{{ $board->id}}</div>
                         </td>
                         <td class="px-6 py-4 text-left whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ $post->title}}</div>
+                            <div class="text-sm text-gray-900">{{ $board->name}}</div>
                         </td>
                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                            <div class="text-sm text-gray-500">{{ $post->view_count}}</div>
+                            <div class="text-sm text-gray-500">{{ $board->created_at}}</div>
                         </td>
                         <td class="px-6 py-4 text-center whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                            {{ $post->created_at}}
+                            {{ $board->type}}
                             </span>
                         </td>
                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                            {{ $post->created_at }}
+                            {{ $board->scope }}
                             </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+
+                        
+                            <a href="{{ route('board.edit', $board->id)}}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">설정</a>
+
+                            <form action="{{ route('board.destroy', $board->id)}}" method="post" style="display: inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"  class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-900  sm:ml-3">삭제</button>
+                            </form>
+
                         </td>
                         </tr>
                         @endforeach

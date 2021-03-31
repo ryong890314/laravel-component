@@ -28,11 +28,11 @@ Route::get('/manage', [ManageController::class, 'index'])->middleware('can:isAdm
 Route::get('/manage/edit/{id}', [ManageController::class, 'edit'])->middleware('can:isAdmin')->name('manage.edit');
 Route::post('/manage/update', [ManageController::class, 'update'])->middleware('can:isAdmin')->name('manage.update');
 
+// Route::get('/board', [BoardController::class, 'manage'])->name('board.manage');
 Route::get('/board', [BoardController::class, 'index'])->name('board.show');
+Route::get('/board/manage', [BoardController::class, 'manage'])->name('board.manage');
 Route::get('/board/create', [BoardController::class, 'create'])->name('board.create');
 Route::post('/board/store', [BoardController::class, 'store'])->name('board.store');
 Route::get('/board/edit/{id}', [BoardController::class, 'edit'])->name('board.edit');
 Route::post('/board/update', [BoardController::class, 'update'])->name('board.update');
-
-// destroy..
-Route::delete('/board/destroy', [BoardController::class, 'destroy'])->name('board.destroy');
+Route::delete('/board/destroy/{id}', [BoardController::class, 'destroy'])->name('board.destroy');

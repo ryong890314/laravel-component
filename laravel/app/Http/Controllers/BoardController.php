@@ -4,12 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\Post;
 
 class BoardController extends Controller
 {
+
     public function index() {
+        $boardsId = Board::first()->id;
+        $posts = Post::where('board_id', $boardsId)->get();
+        return view('board.show')->with('posts', $posts);
+        // return response() -> json(['no' => 2, 'id' => $boardsId, 'posts' => $posts]);
+    }
+
+    public function manage() {
         $boards = Board::all();
-        return view('board.show')->with('boards', $boards);
+        return view('board.manage')->with('boards', $boards);
     }
 
     public function create() {
